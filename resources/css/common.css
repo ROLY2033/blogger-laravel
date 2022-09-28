@@ -1,0 +1,14 @@
+.container{
+    @apply container ml-auto mr-auto;
+
+}
+@media (min-width: 640px){
+    .container{
+        @apply 6px;
+    }
+} 
+@media (min-width: 1024px){
+    .container{
+        @apply 8px;
+    }
+}

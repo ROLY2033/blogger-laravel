@@ -10,6 +10,6 @@ class Tag extends Model
     use HasFactory;
     // relacion mucho a mucho
     public function posts(){
-        return $this->belongsToMany(Post::class , 'imageable');
+        return $this->belongsToMany(Post::class);
     }
 }

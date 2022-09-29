@@ -1,7 +1,6 @@
 <?php
 
 namespace Database\Factories;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +15,10 @@ class ImageFactory extends Factory
      */
     public function definition()
     {
+   
         return [
             //
-            'url' => 'post/'.$this->faker->image('public/storage/posts', 640 , 480, null, false)
+            'url' => 'posts/'. $this->faker->imageUrl('public/storage/posts', 640, 480 , null, false)
 
         ];
     }

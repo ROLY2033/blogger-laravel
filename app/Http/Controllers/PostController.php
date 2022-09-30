@@ -47,9 +47,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
         //
+        $parecidos = Post::where('category_id',    $post->category_id)
+                                    ->where('status' , 2 )
+                                    ->latest('id')
+                                    ->where('id', '!=', $post->id)
+                                    ->take(4)
+                                    ->get();
+        return  view('posts.show' , compact('post' , 'parecidos'));
+
     }
 
     /**

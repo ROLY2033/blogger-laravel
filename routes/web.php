@@ -12,6 +12,8 @@ Route::get('category/{category}' , [PostController::class , 'category'])->name('
 
 Route::get('tag/{tag}', [PostController::class , 'tag'])->name('posts.tag');
 
+// los middleware
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

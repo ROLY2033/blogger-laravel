@@ -7,15 +7,26 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
-    {{-- :addams user password: 123456789 --}}
-@stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+        <div class="card">
+            <div class="card-body">
+                {!! Form::open(['route' => 'admin.categories.store']) !!}
 
-@section('js')
-    <script> console.log('Hi!'); </script>
+                    <div class="form-group">
+                        {!! Form::label('name','nombre',) !!}
+                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'ingrese el nombre de la categoria']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('slug','slug',) !!}
+                        {!! Form::text('slug', null, ['class' => 'form-control', 'placeholder' => 'ingrese el slug de la categoria']) !!}
+                    </div>
+
+
+                    {!! Form::submit('Crear categoria', ['class' => 'btn btn-primary']) !!}
+                    
+                {!! Form::close() !!}
+            </div>
+        </div>
 @stop
 

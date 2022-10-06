@@ -15,11 +15,22 @@
                     <div class="form-group">
                         {!! Form::label('name','nombre',) !!}
                         {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'ingrese el nombre de la categoria']) !!}
+                        
+                        @error('name')
+                            <span class="text-danger"> {{$message}}</span>
+                        @enderror
+                        
+
                     </div>
 
                     <div class="form-group">
                         {!! Form::label('slug','slug',) !!}
                         {!! Form::text('slug', null, ['class' => 'form-control', 'placeholder' => 'ingrese el slug de la categoria', 'readonly']) !!}
+
+                        @error('slug')
+                             <span class="text-danger"> {{$message}}</span>
+                        @enderror
+                    
                     </div>
 
 

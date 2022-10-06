@@ -40,7 +40,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-        return $request->all();
+        $request->validate(['name' => 'required' , 'slug'=> 'required|unique:categories']);
+
+        $category = Category::create($request->all());
+        
+        return redirect()->route('admin.categories.edit', $category)->with('info' , 'la categoria se creo');
+
+        // https://youtu.be/nANAMiWwyU8?list=PLZ2ovOgdI-kX3XFj77zlvSQYhJyJSYQWr&t=2514
     }
 
     /**
@@ -77,6 +83,10 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $request->validate(['name' => 'required' , 'slug'=> "required|unique:categories,slug,$category->id"]);
+
+        $category->update($request->all());
+        return redirect()->route('admin.categories.edit', $category)->with('info' , 'la categoria se actualizo');
     }
 
     /**
@@ -88,5 +98,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('info' , 'la categoria se ha borrado');
     }
 }

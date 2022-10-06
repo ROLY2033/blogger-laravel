@@ -7,6 +7,14 @@
 @stop
 
 @section('content')
+    @if (session('info'))
+        <div class="alert alert-success">
+                <strong>
+                    {{session('info')}}
+                </strong>
+        </div>
+        
+    @endif
    <div class="card">
         <div class="card-header">
             <a class="btn btn-primary" href="{{route('admin.categories.create')}}">agregar categoria</a>

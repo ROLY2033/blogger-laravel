@@ -18,7 +18,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Storage::makeDirectory('posts');
+        Storage::deleteDirectory('public/posts');
+        
+        Storage::makeDirectory('public/posts');
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

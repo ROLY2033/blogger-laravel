@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -15,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::where('status' , 2)->get();
+        $posts = Post::where('status' , 2)->latest('id')->paginate(3);
         return view('posts.index' , compact('posts'));
 
     }
@@ -47,9 +49,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
         //
+        $parecidos = Post::where('category_id',    $post->category_id)
+                                    ->where('status' , 2 )
+                                    ->latest('id')
+                                    ->where('id', '!=', $post->id)
+                                    ->take(4)
+                                    ->get();
+        return  view('posts.show' , compact('post' , 'parecidos'));
+
     }
 
     /**
@@ -84,5 +94,18 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function category(Category $category){
+        $posts = Post::where('category_id' , $category->id)
+                        ->where('status', 2)
+                        ->latest('id')
+                        ->paginate(3);
+        return view('posts.category', compact('posts' , 'category'));
+    }
+    public function tag(Tag $tag){
+       
+        $posts =  $tag->posts()->where('status' ,2)->latest('id')->paginate(3);
+        return view('posts.tag' , compact('posts' , 'tag'));
     }
 }

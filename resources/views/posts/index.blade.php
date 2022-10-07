@@ -1,16 +1,38 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-red-600">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque natus dignissimos accusamus numquam maxime et officia, eveniet ratione asperiores consectetur sed nihil atque! Explicabo mollitia ad asperiores repellat nobis aspernatur.
-        
-    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 text-center pb-8">
+       <h3>lista de publicaciones</h3>
 
-    <div class="grid grid-cols-3 gap-1">
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
 
         @foreach ($posts as $post)
-            <article>
-                {{ $post->image }}
+            <article class="w-full h-80 bg-cover bg-center @if ($loop->first)
+                col-span-2
+            @endif" style="background-image: url(@if($post->image){{ Storage::url($post->image->url) }} @else https://developers.google.com/site-assets/images/home/developers-social-media.png @endif)">
+              <div class="h-full w-full px-8 flex flex-col justify-center">
+                <div>
+                        @foreach ($post->tags  as $tag)
+
+                            <a href="{{route('posts.tag', $tag)}}" class=" bg-{{$tag->color}}-600 inline-block px-3 h-6  text-white rounded-full"> {{ $tag->name}}</a>
+
+                        @endforeach
+                </div>
+                <h1 class="text-4xl text-white leading-8 font-bold mt-4">
+                            <a href="{{route('posts.show',$post)}}">
+                                {{$post->name}}
+                            </a>
+                </h1>
+              </div>
             </article>
+
         @endforeach
+
     </div>
+
+    <div class="mt-4">
+        {{$posts->links()}}
+    </div>
+</div>
 </x-app-layout>
-{{-- https://www.youtube.com/watch?v=hdBzjtaAgGE&list=PLZ2ovOgdI-kX3XFj77zlvSQYhJyJSYQWr&index=7 --}}
+{{-- https://youtu.be/hdBzjtaAgGE?list=PLZ2ovOgdI-kX3XFj77zlvSQYhJyJSYQWr&t=1027 --}}

@@ -22,7 +22,7 @@
                             <td>{{$post->id}}</td>
                             <td>{{$post->name}}</td>
                             <td with="10px">
-                                <a class="btn btn-primary btn-sm" href="{{route('admin.posts.edit')}}">editar</a>
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.posts.edit' , $post)}}">editar</a>
                             </td>
                             <td with="10px">
                                 <form action="{{route('admin.posts.destroy' , $post)}}" method="post">

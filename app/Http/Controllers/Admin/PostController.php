@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -43,11 +44,20 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $StorePostRequest)
     {
-        //
+        $post = Post::create($StorePostRequest->all());
+
+        if($StorePostRequest->tags){
+            $post->tags()->attach($StorePostRequest->tags);
+        }
+        return redirect()->route('admin.posts.edit', compact('post'));
     }
 
+        public function attachPosts($posts) {
+            $this->posts()->attach($posts);
+        }
+    
     /**
      * Display the specified resource.
      *
@@ -57,6 +67,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        return  view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -68,6 +79,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
+        // no funcion con redirect solo con view
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -80,6 +93,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        return redirect()->route('admin.posts.edit', $request)->with('info' , 'la categoria se actualizo');
     }
 
     /**

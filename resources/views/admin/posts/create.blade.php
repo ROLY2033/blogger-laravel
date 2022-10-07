@@ -9,7 +9,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        {!! Form::open(['route' => 'admin.posts.store', 'autocomplete' => 'off']) !!}
+        {!! Form::open(['route' => 'admin.posts.store', 'autocomplete' => 'off', 'files' => true ]) !!}
                 {!! Form::hidden('user_id', auth()->user()->id) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'nombre') !!}
@@ -62,6 +62,23 @@
                           <span class="text-danger"> {{$message}}</span>
                     @enderror
                 </div>
+                <div class="row mb-4">
+                        <div class="col">
+                            <img id="picture" class="w-50" src="https://developers.google.com/site-assets/images/home/developers-social-media.png" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                {!! Form::label('file', 'imagen mostrada en el post' ) !!}
+                                {!! Form::file('file', ['class' => 'form-control-file' , 'accept' => 'image/*']) !!}
+                                @error('file')
+                                        <span class="text-danger"> {{$message}}</span>
+                                @enderror
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, error ipsa molestias, nam soluta officia fuga beatae officiis, enim necessitatibus cum assumenda sint illo tempora optio facere ratione ex. Rem.</p>
+                                
+                            </div>
+                          
+                        </div>
+                </div>
                 <div class="form-group">
                      {!! Form::label('extract', 'extracto') !!}
                      {!! Form::textarea('extract', null,['class'=>'form-control']) !!}
@@ -110,6 +127,17 @@
             .catch( error => {
                 console.error( error );
             } );
+
+            document.getElementById("file").addEventListener('change' , cambiarImagen);
+            function cambiarImagen(event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+                reader.onload = (event) =>{
+                    document.getElementById("picture").setAttribute('src', event.target.result)
+                }
+                reader.readAsDataURL(file);
+            }
+            
         </script>
     
 @endsection

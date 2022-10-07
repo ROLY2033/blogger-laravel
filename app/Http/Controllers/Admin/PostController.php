@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -46,7 +47,17 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $StorePostRequest)
     {
+        // return 
+      
         $post = Post::create($StorePostRequest->all());
+
+        if($StorePostRequest->file('file')){
+            $url = Storage::put("public/posts" , $StorePostRequest->file('file'));
+            $post->image()->create([
+                'url' => $url 
+            ]);
+        }
+
 
         if($StorePostRequest->tags){
             $post->tags()->attach($StorePostRequest->tags);
@@ -54,9 +65,9 @@ class PostController extends Controller
         return redirect()->route('admin.posts.edit', compact('post'));
     }
 
-        public function attachPosts($posts) {
-            $this->posts()->attach($posts);
-        }
+        // public function attachPosts($posts) {
+        //     $this->posts()->attach($posts);
+        // }
     
     /**
      * Display the specified resource.

@@ -10,7 +10,11 @@
         {{-- contenido principal--}}
         <div class="col-span-2">
             <figure>
-                <img class="w-full h-80 object-cover object-center" src="{{Storage::url($post->image->url) }}" alt="">
+                @if ($post->image)
+                 <img class="w-full h-80 object-cover object-center" src="{{Storage::url($post->image->url) }}" alt="">
+                @else
+                <img src="https://developers.google.com/site-assets/images/home/developers-social-media.png" alt="">
+                @endif
             </figure>
             <div class="text-base color-gray-500 mt-4">
                 {{$post->body}}
@@ -22,9 +26,13 @@
                 @foreach ($parecidos as $parecido)
                     <li class="mb-4">
                         <a class="flex" href="{{ route('posts.show', $parecido)}}">
-                                <img class="w-60 h-36 object-cover" src="{{Storage::url($parecido->image->url)}}" alt="">
+                                @if ($post->category->image)
+                                 <img class="w-60 h-36 object-cover" src="{{Storage::url($parecido->image->url)}}" alt="">
+                                @else
+                                    <img src="https://developers.google.com/site-assets/images/home/developers-social-media.png" alt="">
+                                @endif
                                 <span class="ml-2 text-base">
-                                    {{$parecido->name}}
+                                    {!! $parecido->name !!}
                                 </span>
                         </a>
                     </li>

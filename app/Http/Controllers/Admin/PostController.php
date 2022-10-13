@@ -48,15 +48,22 @@ class PostController extends Controller
     public function store(StorePostRequest $StorePostRequest)
     {
         // return 
-      
+       
         $post = Post::create($StorePostRequest->all());
 
-        if($StorePostRequest->file('file')){
-            $url = Storage::put("public/posts" , $StorePostRequest->file('file'));
-            $post->image()->create([
-                'url' => $url 
-            ]);
-        }
+        $files = $StorePostRequest->file('file');
+        
+       
+            if($StorePostRequest->file('file')){
+                
+                foreach ($files as $file) {
+                $url = Storage::put("public/posts" , $file);
+                $post->image()->create([
+                        'url' => $url
+                    ]);
+                }
+            }
+        
 
 
         if($StorePostRequest->tags){

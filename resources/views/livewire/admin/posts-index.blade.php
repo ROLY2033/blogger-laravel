@@ -13,7 +13,8 @@
                     <tr>
                         <th class="">Id</th>
                         <th class="">Name</th>
-                        <th>Image</th>
+                        <th class=" text-center ">Image</th>
+                        <th>category</th>
                         <th colspan="2"></th>
                     </tr>
                 </thead>
@@ -24,10 +25,16 @@
                             <td>{{$post->name}}</td>
                             <td>
                                 @if ($post->image)
-                                     <img width="357" height="240"  src="{{Storage::url($post->image->url)}}" alt=""></td>
+                                    <div class=" offset-2 w-50 h-50">
+                                {{-- width="357" height="240" --}}
+                                     <img class="img-thumbnail"   src="{{Storage::url($post->image->url)}}" alt="">
+                                    </div>
+                            </td>
                                 @else
                                   <img width="307" height="240"  src="https://developers.google.com/site-assets/images/home/developers-social-media.png" alt="">
                                 @endif
+                                <td>{{$post->category->name}}</td>
+                                    
                             <td with="10px">
                                 <a class="btn btn-primary btn-sm" href="{{route('admin.posts.edit' , $post)}}">editar</a>
                             </td>

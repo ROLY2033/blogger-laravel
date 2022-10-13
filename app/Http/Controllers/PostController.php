@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
@@ -57,13 +58,16 @@ class PostController extends Controller
         //
         
         $user = User::where('id' , '=' , $post->user_id);
+        
+        $images = Image::where('imageable_id' ,'=', $post->image->imageable_id)->get();
+
         $parecidos = Post::where('category_id',    $post->category_id)
                                     ->where('status' , 2 )
                                     ->latest('id')
                                     ->where('id', '!=', $post->id)
                                     ->take(4)
                                     ->get();
-        return  view('posts.show' , compact('post' , 'parecidos', 'user'));
+        return  view('posts.show' , compact('post' , 'parecidos', 'user', 'images'));
 
     }
 

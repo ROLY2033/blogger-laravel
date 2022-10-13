@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Livewire\WithFileUploads;
 
 class StorePostRequest extends FormRequest
 {
@@ -11,6 +12,8 @@ class StorePostRequest extends FormRequest
      *
      * @return bool
      */
+    use WithFileUploads;
+
     public function authorize()
     {
         if($this->user_id == auth()->user()->id){
@@ -27,11 +30,13 @@ class StorePostRequest extends FormRequest
      */
     public function rules()
     {
+        
+     
         $rules = [
             'name' => 'required',
             'slug' => 'required|unique:posts',
             'status' => 'required|in:1,2',
-            'file' => 'image'
+            'file.*' => 'image'
         ];
         if($this->status == 2){
                 $rules = array_merge($rules,[
@@ -41,6 +46,7 @@ class StorePostRequest extends FormRequest
                     'body' => 'required'
                 ]);
         }
+
         return $rules;
     }
 }

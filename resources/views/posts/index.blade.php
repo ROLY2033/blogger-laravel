@@ -4,10 +4,11 @@
 
 
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
 
         @foreach ($posts as $post)
-            <article class="w-full h-80 bg-cover bg-center @if ($loop->first)
+        {{-- <article class="w-full h-80 bg-cover bg-center @if ($loop->first) --}}
+            <article class="w-full h-96 bg-cover bg-center @if ($loop->first)
                 col-span-2
             @endif" style="background-image: url(@if($post->image){{ Storage::url($post->image->url) }} @else https://developers.google.com/site-assets/images/home/developers-social-media.png @endif)">
               <div class="h-full w-full px-8 flex flex-col justify-center">

@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -17,7 +18,9 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::where('status' , 2)->latest('id')->paginate(3);
+       
+        $posts = Post::where('status' , 2)->latest('id')->paginate(5);
+        
         return view('posts.index' , compact('posts'));
 
     }
@@ -52,13 +55,15 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        
+        $user = User::where('id' , '=' , $post->user_id);
         $parecidos = Post::where('category_id',    $post->category_id)
                                     ->where('status' , 2 )
                                     ->latest('id')
                                     ->where('id', '!=', $post->id)
                                     ->take(4)
                                     ->get();
-        return  view('posts.show' , compact('post' , 'parecidos'));
+        return  view('posts.show' , compact('post' , 'parecidos', 'user'));
 
     }
 

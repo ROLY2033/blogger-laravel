@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -53,6 +54,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('M d, o  ');
+    }
+    
+    public function getUpdatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('M d, o  ');
+    }
+
     public function show(Post $post)
     {
         //
@@ -61,13 +73,17 @@ class PostController extends Controller
         
         $images = Image::where('imageable_id' ,'=', $post->image->imageable_id)->get();
 
+        $tiempo = $this->getCreatedAtAttribute($post->created_at);
+
+
         $parecidos = Post::where('category_id',    $post->category_id)
                                     ->where('status' , 2 )
                                     ->latest('id')
                                     ->where('id', '!=', $post->id)
                                     ->take(4)
                                     ->get();
-        return  view('posts.show' , compact('post' , 'parecidos', 'user', 'images'));
+        return  view('posts.show' , compact('post' , 'parecidos', 'user', 'images' , 'tiempo'));
+        
 
     }
 

@@ -9,6 +9,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File; 
 
 class PostController extends Controller
 {
@@ -122,8 +123,21 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        
+        // foreach ($post as $p) {
+        //     #
+        // }
+        // $store = Post::findOrFail($post);
+
+        // $image_path = app_path("{$store->image->url}");
+
+
+        // if(File::exists($image_path)){
+        //         unlink($image_path);
+        // }
+
         $post->delete();
+        // File::delete($image_path);
+
         return redirect()->route('admin.posts.index')->with('info', 'el post se borro correactamente');
     }
 }

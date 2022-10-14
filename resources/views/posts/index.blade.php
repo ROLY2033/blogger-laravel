@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 text-center pb-8">
-       <h3>lista de publicaciones</h3>
+       <h3 class="font-bold uppercase mb-3 text-pink-600">lista de publicaciones</h3>
 
     @auth
         

@@ -18,8 +18,7 @@
         <div class="offset-7 position-absolute top-0 start-100  w-25 rounded-fill  translate-middle">
             <p class="d-block w-50 p-2 bg-danger">{{$fecha}} </p>
         </div>
-   
-        
+ 
     
     </div>
     

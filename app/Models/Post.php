@@ -26,7 +26,11 @@ class Post extends Model
 
     }
      // relacion polimorfica
-     public function image(){
+    public function image(){
         return $this->morphOne(Image::class, 'imageable');
-     }
+    }
+
+    public function comment(){
+        return $this->morphOne(Comment::class , 'commentable');
+    }
 }

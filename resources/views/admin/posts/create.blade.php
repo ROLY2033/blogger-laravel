@@ -64,7 +64,11 @@
                 </div>
                 <div class="row mb-4">
                         <div class="col">
-                            <img id="picture" class="w-50" src="https://developers.google.com/site-assets/images/home/developers-social-media.png" alt="">
+                            @isset ($post->image)
+                                <img id="picture" class="w-50" src="{{Storage::url($post->image->url)}}" alt="">
+                                @else
+                                <img class="w-50"  src="https://developers.google.com/site-assets/images/home/developers-social-media.png"" alt="">
+                            @endisset
                         </div>
                         <div class="col">
                             <div class="form-group">

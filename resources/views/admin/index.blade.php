@@ -11,17 +11,18 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <p>Welcome to this beautiful admin panel.</p>
-    <div class="position-relative w-50 mt-5 justify-content-center d-flex s">
+    <div class="position-relative w-50  mt-5 justify-content-center d-flex s">
    
         <a  href="{{route('posts.show' , $lastpost)}}"><img class="img-thumbnail rounded-lg position-absolute border border-secondary" src="{{ Storage::url($lastpost->image->url)}}" alt="">  </a> 
         
         <div class="offset-7 position-absolute top-0 start-100  w-25 rounded-fill  translate-middle">
             <p class="d-block w-50 p-2 bg-danger">{{$fecha}} </p>
         </div>
- 
     
     </div>
-    
+    <div class="offset-7 position-absolute bottom-0 start-0  w-25 rounded-fill  translate-middle">
+        <p class="d-block w-100 text-center text-uppercase p-2 bg-danger">{{$lastpost->name}} </p>
+    </div>   
 
     
     {{-- :addams user password: 123456789 --}}

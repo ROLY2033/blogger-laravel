@@ -7,10 +7,10 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
-use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File; 
-
+use App\Models\Image;
 class PostController extends Controller
 {
     /**
@@ -46,7 +46,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $StorePostRequest)
+    public function store(PostRequest $StorePostRequest)
     {
         // return 
        
@@ -99,7 +99,10 @@ class PostController extends Controller
     {
         //
         // no funcion con redirect solo con view
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::pluck('name', 'id');
+        $tags = Tag::all();
+
+        return view('admin.posts.edit', compact('post' , 'categories', 'tags'));
     }
 
     /**
@@ -109,10 +112,55 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
         //
-        return redirect()->route('admin.posts.edit', $request)->with('info' , 'la categoria se actualizo');
+        $post->update($request->all());
+        $files = $request->file('file');
+        
+        // $images = Image::where('imageable_id' ,'=', $post->image->imageable_id)->get();
+        $tags =  $request->tags;
+        $post->tags()->detach($tags);
+        
+                if($request->file('file')){
+                    
+                    // foreach ($files as $file) {
+                    $url = Storage::put("public/posts" , $files);
+                    
+                    if($post->image){
+                                Storage::delete($post->image->url);
+                                $post->image()->update([
+                                    'url' => $url
+                                ]);
+                                
+
+                                // $post->image()->create([
+                                //     'url' => $url
+                                // ]);
+       
+                    }    
+                    else{
+                        $post->image()->create([
+                            'url' => $url
+                        ]);
+                    }
+                // }    
+                
+            }
+            
+            
+            $post->tags()->detach($tags);
+            if($tags){
+                // $post->tags()->unset($request->tags);
+
+                // eliminar el Quita un object de el almacenamiento 
+                $post->tags()->attach($tags);
+                
+            }
+       
+    //    return $files;
+        return redirect()->route('admin.posts.edit', compact('post', 'tags'))->with('info' , 'el post  se actualizo correctamente');
+        // return $request->tags;
     }
 
     /**
@@ -136,6 +184,12 @@ class PostController extends Controller
         // }
 
         $post->delete();
+        $images = Image::where('imageable_id' ,'=', $post->image->imageable_id)->get();
+        foreach ($images as $image) {
+            Storage::delete($image->url);
+
+        }
+       
         // File::delete($image_path);
 
         return redirect()->route('admin.posts.index')->with('info', 'el post se borro correactamente');

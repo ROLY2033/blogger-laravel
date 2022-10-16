@@ -331,44 +331,14 @@ return [
             'icon' => 'far fa-fw fa-bookmark',
             'active' => ['admin/tags*']
         ],
+        // comentarios
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
+            'text' => 'Comments',
+            'route' => 'admin.comments.index',
+            'icon' => 'far fa-fw fa-comments',
+            'active' => ['admin/comments*']
         ],
+
         ['header' => 'OPCIONES DE BLOG'],
         [
             'text'       => 'Lista de post',

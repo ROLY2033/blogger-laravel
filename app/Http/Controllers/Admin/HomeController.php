@@ -21,6 +21,7 @@ class HomeController extends Controller
     }
 
     public function index(){
+       
         $lastpost = Post::latest('id')->first();
         $fecha = $this->getCreatedAtAttribute($lastpost->created_at);
         return view('admin.index', compact('lastpost' ,'fecha'));

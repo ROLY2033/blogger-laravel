@@ -68,7 +68,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
-        
+        $this->authorize('published', $post);
         $user = User::where('id' , '=' , $post->user_id);
         
         $images = Image::where('imageable_id' ,'=', $post->image->imageable_id)->get();

@@ -99,6 +99,7 @@ class PostController extends Controller
     {
         //
         // no funcion con redirect solo con view
+        $this->authorize('author', $post);
         $categories = Category::pluck('name', 'id');
         $tags = Tag::all();
 
@@ -115,20 +116,21 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         //
+        $this->authorize('author', $post);
+
         $post->update($request->all());
         $files = $request->file('file');
         
         // $images = Image::where('imageable_id' ,'=', $post->image->imageable_id)->get();
-        $tags =  $request->tags;
-        $post->tags()->detach($tags);
-        
-                if($request->file('file')){
+      
+     
+        if($request->file('file')){
                     
                     // foreach ($files as $file) {
                     $url = Storage::put("public/posts" , $files);
                     
                     if($post->image){
-                                Storage::delete($post->image->url);
+                                // Storage::delete($post->image->url);
                                 $post->image()->update([
                                     'url' => $url
                                 ]);
@@ -147,14 +149,12 @@ class PostController extends Controller
                 // }    
                 
             }
-            
-            
-            $post->tags()->detach($tags);
+            $tags = $request->tags;
             if($tags){
                 // $post->tags()->unset($request->tags);
 
-                // eliminar el Quita un object de el almacenamiento 
-                $post->tags()->attach($tags);
+                // sincronizar la etiqueta con sync
+                $post->tags()->sync($tags);
                 
             }
        
@@ -182,6 +182,7 @@ class PostController extends Controller
         // if(File::exists($image_path)){
         //         unlink($image_path);
         // }
+        $this->authorize('author', $post);
 
         $post->delete();
         $images = Image::where('imageable_id' ,'=', $post->image->imageable_id)->get();

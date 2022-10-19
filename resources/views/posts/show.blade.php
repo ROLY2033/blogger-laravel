@@ -3,6 +3,7 @@
 
    @auth
    
+
     <div class="container py-8 m-5">
             <h1 class="uppercase mb-2 text-4xl font-bold text-gray-600 ">{{$post->name }}</h1>
             <h2 class="font-bold text-pink-600 "> @autor: {{ $post->user->name }}</h2>
@@ -30,12 +31,20 @@
                 @endif
                 
             </figure>
-            <link rel="stylesheet" href="path/to/assets/content-styles.css" type="text/css"> 
 
             <div class="text-base color-gray-500 mt-4 ml-5 mr-5">
                 {!! $post->body !!}
             </div>
+            {{--                 
+                        <textarea name="description" id="editor" class="bg-gray-500">
+                        </textarea>
+                    </div>
+                    <button
+                        class="px-4 py-2 mt-4 text-sm text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                        Submit
+                    </button> --}}
         </div>
+
         <aside class="text-2xl font-bold text-gray-600 mb-4 ">
             <h1>MAS DE {{$post->category->name}}</h1>
             <ul>
@@ -56,9 +65,16 @@
             </ul>
         </aside>
     </div>
+
     @else
     <a href="{{route('login')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">login</a>
     <a href="{{route('register')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">registrar</a>
     
     @endauth
 </x-app-layout>
+
+{{-- <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor.create(document.querySelector('#editor')).catch((error) => {
+    console.error(error);
+  }); --}}

@@ -119,15 +119,14 @@ class PostController extends Controller
         $this->authorize('author', $post);
 
         $post->update($request->all());
-        $files = $request->file('file');
-        
+      
         // $images = Image::where('imageable_id' ,'=', $post->image->imageable_id)->get();
       
      
         if($request->file('file')){
                     
                     // foreach ($files as $file) {
-                    $url = Storage::put("public/posts" , $files);
+                    $url = Storage::put("public/posts" , $request->file('file'));
                     
                     if($post->image){
                                 // Storage::delete($post->image->url);

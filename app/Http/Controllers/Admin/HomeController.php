@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Carbon\Carbon;
 class HomeController extends Controller
 {
@@ -21,10 +22,23 @@ class HomeController extends Controller
     }
 
     public function index(){
-       
-        $lastpost = Post::latest('id')->first();
+
+        $lastpost = Post::where('user_id', '=', auth()->user()->id)->latest('id')->first();
+        
+
+        // 
         $fecha = $this->getCreatedAtAttribute($lastpost->created_at);
         return view('admin.index', compact('lastpost' ,'fecha'));
-        // return $lastpost;
+            
+        
+   
+        // $userlastpost = User::where('id' , '=' , $lastpost->user_id);
+       
+       
+        // return $user;
+        
+
+      
+       
     }
 }

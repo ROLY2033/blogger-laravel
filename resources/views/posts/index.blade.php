@@ -24,6 +24,9 @@
                                 {{$post->name}}
                             </a>
                 </h1>
+                <h5 class="inline-block px-3 h-6  text-red-600 font-bold rounded-full">
+                    @ {{ $post->user->name }}
+                </h5>
               </div>
             </article>
 

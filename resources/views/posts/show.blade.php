@@ -1,8 +1,8 @@
 <x-app-layout>
 
-
    @auth
    
+ 
 
     <div class="container py-8 m-5">
             <h1 class="uppercase mb-2 text-4xl font-bold text-gray-600 ">{{$post->name }}</h1>
@@ -32,9 +32,19 @@
                 
             </figure>
 
-            <div class="text-base color-gray-500 mt-4 ml-5 mr-5">
+            <div class="text-base color-gray-500 mt-4 ml-5 mr-5 grid justify-center">
+                <h3 class="text-center mt-5">LISTA DE VIDEOS</h3>
                 {!! $post->body !!}
+
             </div>
+            {{-- {!! Form::open(['route' =>  'admin.comments.create' , $post->user->id]) !!}
+                {!! Form::textarea('comment', null, ['class' => 'form-cont']) !!}
+                {!! Form::submit('enviar') !!}
+            {!! Form::close() !!} --}}
+
+            {{-- <iframe src="https://www.xvideos.es/embedframe/72920430" frameborder=0 width=510 height=400 scrolling=no allowfullscreen=allowfullscreen></iframe> --}}
+         
+
             {{--                 
                         <textarea name="description" id="editor" class="bg-gray-500">
                         </textarea>
@@ -72,9 +82,3 @@
     
     @endauth
 </x-app-layout>
-
-{{-- <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
-<script>
-  ClassicEditor.create(document.querySelector('#editor')).catch((error) => {
-    console.error(error);
-  }); --}}

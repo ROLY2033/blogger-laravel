@@ -23,7 +23,9 @@ class HomeController extends Controller
 
     public function index(){
 
-        $lastpost = Post::where('user_id', '=', auth()->user()->id)->latest('id')->first();
+        $lastpost = Post::where('user_id', '=', auth()->user()->id)
+                                                      ->latest('id')
+                                                      ->first();
         
 
         // 

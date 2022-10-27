@@ -318,6 +318,12 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Users',
+            'route'         => 'admin.users.index',
+            'icon'        => 'fas fa-adjust fa-user',
+            'active'    => ['admin/users*']
+        ],
         ['header' => 'ADMINISTRADOR'],
         [
             'text' => 'categorias',

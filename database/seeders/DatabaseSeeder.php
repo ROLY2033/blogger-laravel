@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call(RoleSeeder::class);
+
         $this->call(UserSeeder::class);
         Category::factory(4)->create();
         Tag::factory(8)->create();

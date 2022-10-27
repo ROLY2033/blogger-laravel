@@ -126,11 +126,11 @@
             .catch( error => {
                 console.error( error );
             } );
-            ClassicEditor
-            .create( document.querySelector( '#body') )
-            .catch( error => {
-                console.error( error );
-            } );
+            // ClassicEditor
+            // .create( document.querySelector( '#body') )
+            // .catch( error => {
+            //     console.error( error );
+            // } );
 
             document.getElementById("file").addEventListener('change' , cambiarImagen);
             function cambiarImagen(event) {

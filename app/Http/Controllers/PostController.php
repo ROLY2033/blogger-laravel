@@ -82,6 +82,9 @@ class PostController extends Controller
                                     ->where('id', '!=', $post->id)
                                     ->take(4)
                                     ->get();
+        
+        
+
         return  view('posts.show' , compact('post' , 'parecidos', 'user', 'images' , 'tiempo'));
         
 
@@ -122,12 +125,14 @@ class PostController extends Controller
     }
 
     public function category(Category $category){
+
         $posts = Post::where('category_id' , $category->id)
                         ->where('status', 2)
                         ->latest('id')
                         ->paginate(3);
         return view('posts.category', compact('posts' , 'category'));
     }
+
     public function tag(Tag $tag){
        
         $posts =  $tag->posts()->where('status' ,2)->latest('id')->paginate(3);

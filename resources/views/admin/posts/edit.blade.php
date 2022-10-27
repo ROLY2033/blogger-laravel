@@ -119,6 +119,7 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
 
         <script>
+  
             $(document).ready( function() {
             $("#name").stringToSlug({
                 setEvents: 'keyup keydown blur',
@@ -131,11 +132,11 @@
             .catch( error => {
                 console.error( error );
             } );
-            ClassicEditor
-            .create( document.querySelector( '#body') )
-            .catch( error => {
-                console.error( error );
-            } );
+            // ClassicEditor
+            // .create( document.querySelector( '#body') )
+            // .catch( error => {
+            //     console.error( error );
+            // } );
 
             document.getElementById("file").addEventListener('change' , cambiarImagen);
             function cambiarImagen(event) {

@@ -22,15 +22,20 @@ class HomeController extends Controller
     }
 
     public function index(){
-
-        $lastpost = Post::where('user_id', '=', auth()->user()->id)
-                                                      ->latest('id')
-                                                      ->first();
         
+        $lastpost = Post::where('user_id', '=', auth()->user()->id)
+        ->latest('id')
+        ->first();
+      
+        if(!empty($lastpost)){
 
-        // 
-        $fecha = $this->getCreatedAtAttribute($lastpost->created_at);
-        return view('admin.index', compact('lastpost' ,'fecha'));
+            $fecha = $this->getCreatedAtAttribute($lastpost->created_at);
+            return view('admin.index', compact('lastpost' ,'fecha'));
+        }else{
+            return view('admin.index');
+        }
+
+      
             
         
    

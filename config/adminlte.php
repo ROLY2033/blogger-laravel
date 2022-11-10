@@ -320,29 +320,41 @@ return [
         ],
         [
             'text'        => 'Users',
-            'route'         => 'admin.users.index',
+            'route'       => 'admin.users.index',
             'icon'        => 'fas fa-adjust fa-user',
-            'active'    => ['admin/users*']
+            'active'      => ['admin/users*'],
+            'can'         => 'admin.users.index'
         ],
-        ['header' => 'ADMINISTRADOR'],
+        [
+            'text'        => 'Lista de Roles',
+            'route'       => 'admin.roles.index',
+            'icon'        => 'fas fa-adjust fa-asterisk',
+            'active'      => ['admin/roles*'],
+            // 'can'         => 'admin.roles.index'
+        ],
+
+        // ['header' => 'ADMINISTRADOR'],
         [
             'text' => 'categorias',
             'route'  => 'admin.categories.index',
             'icon' => 'fab fa-fw fa-buffer',
-            'active' => ['admin/categories*']
+            'active' => ['admin/categories*'],
+            'can'         => 'admin.categories.index'
         ],
         [
             'text' => 'tags',
             'route'  => 'admin.tags.index',
             'icon' => 'far fa-fw fa-bookmark',
-            'active' => ['admin/tags*']
+            'active' => ['admin/tags*'],
+            'can'         => 'admin.tags.index'
         ],
         // comentarios
         [
             'text' => 'Comments',
             'route' => 'admin.comments.index',
             'icon' => 'far fa-fw fa-comments',
-            'active' => ['admin/comments*']
+            'active' => ['admin/comments*'],
+            'can'         => 'admin.users.index'
         ],
 
         ['header' => 'OPCIONES DE BLOG'],
@@ -350,11 +362,13 @@ return [
             'text'       => 'Lista de post',
             'icon_color' => 'red',
             'route'        => 'admin.posts.index',
+            'can'        => 'admin.posts.index',
         ],
         [
             'text'       => 'crear post',
             'icon_color' => 'yellow',
             'route'        => 'admin.posts.create',
+            'can'        => 'admin.posts.create',
         ]
     ],
 

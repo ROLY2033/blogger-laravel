@@ -18,6 +18,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('can:admin.posts.index')->only('index');
+        $this->middleware('can:admin.posts.edit')->only('edit' , 'update');
+    }
+
     public function index()
     {
         //

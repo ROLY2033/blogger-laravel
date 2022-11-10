@@ -13,7 +13,9 @@
         <div class="alert alert-success"> <strong>{{session('info')}}</strong></div>
     @endif
     <div class="card-header">
-        <a class="btn btn-primary" href="{{route('admin.tags.create')}}">agregar tag</a>
+        @can('admin.tags.create')
+            <a class="btn btn-primary" href="{{route('admin.tags.create')}}">agregar tag</a>
+        @endcan
     </div>
     <div class="card-body">
         <table class="table table-striped">
@@ -30,14 +32,18 @@
                                 <td>{{$tag->id}}</td>
                                 <td>{{$tag->name}}</td>
                                 <td with="10px">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.tags.edit' , $tag)}}">editar</a>
+                                   @can('admin.tags.edit')
+                                   <a class="btn btn-primary btn-sm" href="{{ route('admin.tags.edit' , $tag)}}">editar</a>
+                                   @endcan
                                 </td>
                                 <td with="10px">
-                                    <form action="{{route('admin.tags.destroy' , $tag)}}" method="post">
+                                    @can('admin.tags.destroy')
+                                        <form action="{{route('admin.tags.destroy' , $tag)}}" method="post">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-danger btn-sm">eliminar</button>
-                                    </form>
+                                        </form>     
+                                    @endcan
                                    
                                 </td>
                             </tr>

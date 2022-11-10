@@ -13,6 +13,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('can:admin.categories.index')->only('index');
+        $this->middleware('can:admin.categories.edit')->only('edit' , 'update');
+    }
+
     public function index()
     {
         //

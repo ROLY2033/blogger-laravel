@@ -13,6 +13,13 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $this->middleware('can:admin.tags.index')->only('index');
+        $this->middleware('can:admin.tags.edit')->only('edit' , 'update');
+    }
+
+
     public function index()
     {
         //

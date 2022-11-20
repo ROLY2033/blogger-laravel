@@ -4,7 +4,7 @@
 
 @section('content_header')
     <a class="btn btn-secondary bt-sm float-right"  href="{{ route('admin.posts.create') }}">crear post</a>
-    <h1>Lista de categoria</h1>
+    <h1>Lista de Post</h1>
 
 @stop
 

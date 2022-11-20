@@ -80,7 +80,9 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         //
+        
         return view('admin.roles.edit');
+       
     }
 
     /**
@@ -93,6 +95,7 @@ class RoleController extends Controller
     public function update(Request $request,Role $role)
     {
         //
+        
         return redirect()->route('admin.roles.edit')->with('info' , "los datos ingresados correctamente");
     }
 

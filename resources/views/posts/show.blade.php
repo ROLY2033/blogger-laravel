@@ -33,7 +33,7 @@
             </figure>
 
             <div class="text-base color-gray-500 mt-4 ml-5 mr-5 grid justify-center">
-                <h3 class="text-center mt-5">LISTA DE VIDEOS</h3>
+                <h3 class="text-center mt-5 mb-3">DESCRIPCION</h3>
                 {!! $post->body !!}
 
             </div>

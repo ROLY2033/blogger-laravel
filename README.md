@@ -1,7 +1,7 @@
 Instalacion del proyecto
 se necesita php y msql corriendo en cualquier paquete como xampp , wamp , laragon
 
-git clone https://github.com/ROLY2033/blogger-laravel.git[dill]
+git clone https://github.com/ROLY2033/blogger-laravel.git
 para los errores habilitar del php.ini
 ```sh
 extension=openssl

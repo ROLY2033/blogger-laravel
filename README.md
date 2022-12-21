@@ -9,6 +9,10 @@ extension=openssl
 extension=fileinfo
 extension=gd
 ```
+instalar composer
+```sh
+composer install
+```
 
 ```sh
 composer update --ignore-platform-req=ext-fileinfo~
@@ -17,7 +21,7 @@ composer update --ignore-platform-req=ext-fileinfo~
 para cuando compila el codigo codigo laravel
 
 ```sh 
-php artinsan migrate --seed
+php artisan migrate --seed
 php artisan serve
 ```
 

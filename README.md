@@ -9,7 +9,7 @@ extension=openssl
 extension=fileinfo
 extension=gd
 ```
-instalar composer
+instalar composer e cambiar el .env-example a .env
 ```sh
 composer install
 ```

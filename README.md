@@ -54,3 +54,5 @@ home sin inicio de session
 home con inicio de session
 ![image](https://user-images.githubusercontent.com/95943858/216058726-fb48bfd0-b9a3-4af6-b678-462548e970f1.png)
 
+Ver el post
+![image](https://user-images.githubusercontent.com/95943858/216059838-e21eaddc-c8e0-436d-9f51-067416b6b9d0.png)

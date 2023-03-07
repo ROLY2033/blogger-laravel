@@ -1,3 +1,4 @@
+# Blog personal - laravel(jetstream)
 Instalacion del proyecto
 se necesita php y msql corriendo en cualquier paquete como xampp , wamp , laragon
 
